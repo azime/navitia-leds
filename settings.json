@@ -1,0 +1,37 @@
+{
+    "rabbitmq": {
+        "exchange-name": "stat_persistor_exchange",
+        "queue-name": "raspberry",
+        "broker-url": "amqp://guest:guest@server:5672//"
+    },
+    "logger": {
+        "version": 1,
+        "disable_existing_loggers": "False",
+        "formatters": {
+            "default": {
+                "format": "[%(asctime)s] [%(levelname)5s] [%(process)5s] [%(name)10s] %(message)s"
+            }
+        },
+        "handlers": {
+            "default": {
+                "level": "DEBUG",
+                "class": "logging.StreamHandler",
+                "formatter": "default"
+            }
+        },
+        "loggers": {
+            "": {
+                "handlers": ["default"],
+                "level": "DEBUG",
+                "propagate": "True"
+            }
+        }
+    },
+    "gpio":{
+        "interval": 10
+    },
+    "regions":{
+        "Auvergne": {"coverages": ["fr-auv)"], "max_par_interval": 30},
+        "Bourgogne":{"coverages": ["fr-bou)"], "max_par_interval": 200}
+    }
+}
