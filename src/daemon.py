@@ -16,7 +16,7 @@ class Daemon(ConsumerMixin):
         self.queues = []
         self.config = config
         self._init_rabbitmq()
-        self.gpio = Gpio()
+        self.gpio = Gpio(config)
 
     def _init_rabbitmq(self):
         """

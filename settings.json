@@ -28,10 +28,10 @@
         }
     },
     "gpio":{
-        "interval": 10
+        "delay": 10
     },
     "regions":{
-        "Auvergne": {"coverages": ["fr-auv)"], "max_par_interval": 30},
-        "Bourgogne":{"coverages": ["fr-bou)"], "max_par_interval": 200}
+        "Auvergne": {"coverages": ["fr-auv)"], "max_hits": 30},
+        "Bourgogne":{"coverages": ["fr-bou)"], "max_hits": 200}
     }
 }

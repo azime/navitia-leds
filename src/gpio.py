@@ -2,9 +2,8 @@
 
 
 class Gpio(object):
-    def __init__(self):
-        self.delay = 0.2
-        self.maxi = 2289
+    def __init__(self, config):
+        self.config = config
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
         self.mapping = {
@@ -51,10 +50,9 @@ class Gpio(object):
         if region:
             if region in self.mapping:
                 for key, value in self.mapping.items():
-                    if region == key:
-                        duty = value["duty"] + 1
+                    if region == key and region in self.config[region]:
+                        value["duty"] = value["duty"] + 1
+                        duty = (value["duty"]*self.config[region]['max_hits'])/100
                         if duty > 100:
                             duty = 100
-                        value["duty"] = duty
-
-                    value["pi"].ChangeDutyCycle(value["duty"])
+                    value["pi"].ChangeDutyCycle(duty)

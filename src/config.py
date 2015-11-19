@@ -39,6 +39,8 @@ class Config(object):
 
     def __init__(self):
         self.rabbitmq = None
+        self.gpio = None
+        self.regions = None
 
     def load(self, config_file):
         """
@@ -58,3 +60,13 @@ class Config(object):
             self.rabbitmq = config_data['rabbitmq']
         else:
             raise ValueError("Config is not valid, rabbitmq is needed")
+
+        if 'gpio' in config_data:
+            self.gpio = config_data['gpio']
+        else:
+            raise ValueError("Config is not valid, gpio is needed")
+
+        if 'regions' in config_data:
+            self.regions = config_data['regions']
+        else:
+            raise ValueError("Config is not valid, regions is needed")
