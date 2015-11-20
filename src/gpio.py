@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+import time
 
 
 class Gpio(object):
     def __init__(self, config):
         self.config = config
+        self.intarval = time.time()
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
         self.mapping = {
@@ -45,7 +47,16 @@ class Gpio(object):
         # Il faut parser le message pour savoir si une recherche d'iti et récupérer le coverage et par la suite la région
         return 'aa'
 
+    def reinitialize(self):
+        #self.config.gpio["delay"] est en minute
+        if (time.time() - self.intarval) > (self.config.gpio["delay"]*60):
+            for key, value in self.mapping.items():
+                value["duty"] = 0
+                value["pi"].ChangeDutyCycle(value["duty"])
+            self.intarval = time.time()
+
     def manage_lights(self, message):
+        self.reinitialize()
         region = self.get_region_is_journeys(message)
         if region:
             if region in self.mapping:

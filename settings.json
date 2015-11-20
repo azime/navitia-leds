@@ -28,7 +28,7 @@
         }
     },
     "gpio":{
-        "delay": 10
+        "delay": 1
     },
     "regions":{
         "Auvergne": {"coverages": ["fr-auv)"], "max_hits": 30},
